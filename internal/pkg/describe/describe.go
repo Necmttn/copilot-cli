@@ -21,7 +21,7 @@ const (
 	noAdditionalFormatting = 0
 )
 
-// humanizeTime is overriden in tests so that its output is constant as time passes.
+// humanizeTime is overridden in tests so that its output is constant as time passes.
 var humanizeTime = humanize.Time
 
 // HumanJSONStringer contains methods that stringify app info for output.

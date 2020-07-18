@@ -52,7 +52,7 @@ type svcLogsOpts struct {
 	configStore   store
 	deployStore   deployedEnvironmentLister
 	sel           deploySelector
-	initCwLogsSvc func(*svcLogsOpts, string) error // Overriden in tests.
+	initCwLogsSvc func(*svcLogsOpts, string) error // Overridden in tests.
 	cwlogsSvc     map[string]cwlogService
 }
 

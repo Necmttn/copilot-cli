@@ -223,7 +223,7 @@ func ToAppRegionalResources(stack *cloudformation.Stack) (*AppRegionalResources,
 			regionalResources.RepositoryURLs[originalSvcName] = uri
 		}
 	}
-	// Check to make sure the KMS key and S3 bucket exist in the stack. There isn't guranteed
+	// Check to make sure the KMS key and S3 bucket exist in the stack. There isn't guaranteed
 	// to be any ECR repos (for a brand new env without any services), so we don't validate that.
 	if regionalResources.KMSKeyARN == "" {
 		return nil, fmt.Errorf("couldn't find KMS output key %s in stack %s", appOutputKMSKey, *stack.StackId)
@@ -237,7 +237,7 @@ func ToAppRegionalResources(stack *cloudformation.Stack) (*AppRegionalResources,
 }
 
 // DNSDelegatedAccountsForStack looks through a stack's parameters for
-// the parameter which stores the comma seperated list of account IDs
+// the parameter which stores the comma separated list of account IDs
 // which are permitted for DNS delegation.
 func DNSDelegatedAccountsForStack(stack *cloudformation.Stack) []string {
 	for _, parameter := range stack.Parameters {

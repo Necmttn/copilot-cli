@@ -62,7 +62,7 @@ type deleteEnvOpts struct {
 	prog          progress
 	sel           configSelector
 
-	// initProfileClients is overriden in tests.
+	// initProfileClients is overridden in tests.
 	initProfileClients func(*deleteEnvOpts) error
 }
 

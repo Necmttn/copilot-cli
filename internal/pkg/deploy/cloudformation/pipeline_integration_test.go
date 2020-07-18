@@ -144,7 +144,7 @@ func TestPipelineCreation(t *testing.T) {
 		// Deploy the environment in the same tools account but in different
 		// region and wait for it to be complete
 		require.NoError(t, envDeployer.DeployEnvironment(&environmentToDeploy))
-		// Make sure the environment was deployed succesfully
+		// Make sure the environment was deployed successfully
 		_, responses := envDeployer.StreamEnvironmentCreation(&environmentToDeploy)
 		resp := <-responses
 		require.NoError(t, resp.Err)

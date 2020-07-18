@@ -21,11 +21,11 @@ To set up an application, you can just run `copilot init`. You'll be asked if yo
 copilot init
 ```
 
-Once you've created an application, Copilot stores that application in SSM Parameter store in your AWS account. The account used to set up your application is known as the "applicaiton account". This is where your app's configuration lives, and anyone who has access to this account can use this app.
+Once you've created an application, Copilot stores that application in SSM Parameter store in your AWS account. The account used to set up your application is known as the "application account". This is where your app's configuration lives, and anyone who has access to this account can use this app.
 
 All resources created within this application will be tagged with the `copilot-app` [aws resource tag](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html). This helps you know which app resources in your account belong to.
 
-The name of your applicaiton has to be unique within your account (even across region).
+The name of your application has to be unique within your account (even across region).
 
 #### Additional App Configurations
 You can also provide more granular configuration for your application by running `copilot app init`. This includes options to:

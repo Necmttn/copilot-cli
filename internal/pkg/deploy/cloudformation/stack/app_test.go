@@ -294,7 +294,7 @@ func TestDNSDelegatedAccountsForStack(t *testing.T) {
 		given map[string]string
 		want  []string
 	}{
-		"should read from parameter and parse comma seperated list": {
+		"should read from parameter and parse comma separated list": {
 			given: map[string]string{
 				appDNSDelegatedAccountsKey: "1234,5678",
 			},

@@ -316,7 +316,7 @@ func TestDeleteApplication(t *testing.T) {
 			},
 			want: nil,
 		},
-		"should return nil given paramter not found error code": {
+		"should return nil given parameter not found error code": {
 			mockDeleteParameter: func(t *testing.T, in *ssm.DeleteParameterInput) (*ssm.DeleteParameterOutput, error) {
 				require.Equal(t, fmt.Sprintf(fmtApplicationPath, mockApplicationName), *in.Name)
 

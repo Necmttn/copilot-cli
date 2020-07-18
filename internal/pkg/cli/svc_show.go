@@ -38,7 +38,7 @@ type showSvcOpts struct {
 	store         store
 	describer     describer
 	sel           configSelector
-	initDescriber func() error // Overriden in tests.
+	initDescriber func() error // Overridden in tests.
 }
 
 func newShowSvcOpts(vars showSvcVars) (*showSvcOpts, error) {

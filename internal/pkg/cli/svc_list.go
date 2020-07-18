@@ -156,7 +156,7 @@ func filterSvcsByName(svcs []*config.Service, wantedNames []string) []*config.Se
 	return filtered
 }
 
-// BuildSvcListCmd builds the command for listing services in an appication.
+// BuildSvcListCmd builds the command for listing services in an application.
 func BuildSvcListCmd() *cobra.Command {
 	vars := listSvcVars{
 		GlobalOpts: NewGlobalOpts(),
