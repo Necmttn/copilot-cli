@@ -272,13 +272,8 @@ func (l LoadBalancedWebServiceConfig) validate() error {
 		}); err != nil {
 			return fmt.Errorf("validate Windows: %w", err)
 		}
-	}
-	if l.TaskConfig.IsARM() {
-		if err = validateARM(validateARMOpts{
-			Spot:     l.Count.AdvancedCount.Spot,
-			SpotFrom: l.Count.AdvancedCount.Range.RangeConfig.SpotFrom,
-		}); err != nil {
-			return fmt.Errorf("validate ARM: %w", err)
+		if l.Network.Connect.Enabled() {
+			return fmt.Errorf("validate Windows: service connect (`network.connect`) is not supported for Windows")
 		}
 	}
 	if err = l.NLBConfig.validate(); err != nil {
@@ -402,13 +397,8 @@ func (b BackendServiceConfig) validate() error {
 		}); err != nil {
 			return fmt.Errorf("validate Windows: %w", err)
 		}
-	}
-	if b.TaskConfig.IsARM() {
-		if err = validateARM(validateARMOpts{
-			Spot:     b.Count.AdvancedCount.Spot,
-			SpotFrom: b.Count.AdvancedCount.Range.RangeConfig.SpotFrom,
-		}); err != nil {
-			return fmt.Errorf("validate ARM: %w", err)
+		if b.Network.Connect.Enabled() {
+			return fmt.Errorf("validate Windows: service connect (`network.connect`) is not supported for Windows")
 		}
 	}
 	return nil
@@ -524,14 +514,6 @@ func (w WorkerServiceConfig) validate() error {
 			return fmt.Errorf(`validate Windows: %w`, err)
 		}
 	}
-	if w.TaskConfig.IsARM() {
-		if err = validateARM(validateARMOpts{
-			Spot:     w.Count.AdvancedCount.Spot,
-			SpotFrom: w.Count.AdvancedCount.Range.RangeConfig.SpotFrom,
-		}); err != nil {
-			return fmt.Errorf("validate ARM: %w", err)
-		}
-	}
 	return nil
 }
 
@@ -603,14 +585,6 @@ func (s ScheduledJobConfig) validate() error {
 			readOnlyFS: s.Storage.ReadonlyRootFS,
 		}); err != nil {
 			return fmt.Errorf(`validate Windows: %w`, err)
-		}
-	}
-	if s.TaskConfig.IsARM() {
-		if err = validateARM(validateARMOpts{
-			Spot:     s.Count.AdvancedCount.Spot,
-			SpotFrom: s.Count.AdvancedCount.Range.RangeConfig.SpotFrom,
-		}); err != nil {
-			return fmt.Errorf("validate ARM: %w", err)
 		}
 	}
 	return nil
@@ -2026,11 +2000,6 @@ type validateWindowsOpts struct {
 	efsVolumes map[string]*Volume
 }
 
-type validateARMOpts struct {
-	Spot     *int
-	SpotFrom *int
-}
-
 func validateHealthCheckPorts(opts validateHealthCheckPortsOpts) error {
 	for _, rule := range opts.alb.RoutingRules() {
 		healthCheckPort := rule.HealthCheckPort(opts.mainContainerPort)
@@ -2384,13 +2353,6 @@ func validateWindows(opts validateWindowsOpts) error {
 		if !volume.EmptyVolume() {
 			return errors.New(`'EFS' is not supported when deploying a Windows container`)
 		}
-	}
-	return nil
-}
-
-func validateARM(opts validateARMOpts) error {
-	if opts.Spot != nil || opts.SpotFrom != nil {
-		return errors.New(`'Fargate Spot' is not supported when deploying on ARM architecture`)
 	}
 	return nil
 }
